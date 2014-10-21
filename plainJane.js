@@ -131,7 +131,7 @@
 
         // If element doesn't exists, stop here.
         } else {
-          throw new Error("Error: Missing Jane.");
+          throw new Error("Error: Where is Jane?");
         }
 
         // Inner wrapper
@@ -174,7 +174,7 @@
         clearInterval(slideTimer);
         slideTimer = null;
 
-        // Init callback
+        // Destroy callback
         opts.onDestroy();
       },
 
@@ -285,6 +285,8 @@
         }
       	removeClass(slides[janePrev], opts.activeClass);
       	addClass(slides[janeNext], opts.activeClass);
+
+        // Transition callback
         opts.onTransition();
       }
 
