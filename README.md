@@ -11,7 +11,7 @@ var carousel = plainJane(".slides");
 
 - speed: 5000 (duration between slide transitions)
 - runOnTimer: true (set to 'false' if slides will be changed manually)
-- janeClass: 'plain-jane' (class for each slide)
+- janeClass: 'plain-jane' (class for the carousel)
 - activeClass: 'active-jane' (class for active slide)
 - prevClass: 'jane-prev' (class for previous button)
 - nextClass: 'jane-next' (class for next button)
