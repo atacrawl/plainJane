@@ -92,6 +92,8 @@
       slideCount,
       prevButton,
       nextButton,
+      dotsList,
+      dotsListItem,
       slideTimer = null;
 
     var plainJane = function (el, options) {
@@ -105,7 +107,7 @@
           activeClass: 'active-jane',
           prevClass: 'jane-prev',
           nextClass: 'jane-next',
-          createButtons: true,
+          toggleMethod: 'buttons',
           pauseOnHover: true,
           displayToggle: true,
           onInit: function(){},
@@ -217,8 +219,8 @@
           slides[i].setAttribute("data-index", i);
         }
 
-        if (opts.createButtons && slideCount > 1) {
-          this._createButtons();
+        if (opts.toggleMethod && slideCount > 1) {
+          this._toggleMethod();
         }
 
         if (opts.pauseOnHover) {
@@ -235,21 +237,40 @@
         opts.onInit();
       },
 
-      _createButtons: function () {
-    		// previous button
-    		prevButton = document.createElement("button");
-    		prevButton.innerHTML = '&laquo;';
-        prevButton.setAttribute("type","button");
-    		addClass(prevButton, opts.prevClass);
-        addEvent(prevButton, "click", this, false);
-    		// next button
-    		nextButton = document.createElement("button");
-    		nextButton.innerHTML = '&raquo;';
-        nextButton.setAttribute("type","button");
-    		addClass(nextButton, opts.nextClass);
-        addEvent(nextButton, "click", this, false);
-        pJane.appendChild(prevButton);
-        pJane.appendChild(nextButton);
+      _toggleMethod: function () {
+        switch (opts.toggleMethod) {
+          case "dots":
+            dotsList = document.createElement("ul");
+            addClass(dotsList, opts.dotsClass);
+            for (var x = 1; x <= slideCount; x++) {
+              dotsListItem = document.createElement("li");
+              addClass(dotsListItem, opts.dotClass);
+              if (x == 1) {
+                addClass(dotsListItem, opts.activeDotClass);
+              }
+              dotsListItem.innerHTML = x;
+              addEvent(dotsListItem, "click", this, false);
+              dotsList.appendChild(dotsListItem);
+            }
+            pJane.appendChild(dotsList);
+            break;
+          default: // since default is 'buttons', make buttons
+            // previous button
+            prevButton = document.createElement("button");
+            prevButton.innerHTML = '&laquo;';
+            prevButton.setAttribute("type","button");
+            addClass(prevButton, opts.prevClass);
+            addEvent(prevButton, "click", this, false);
+            // next button
+            nextButton = document.createElement("button");
+            nextButton.innerHTML = '&raquo;';
+            nextButton.setAttribute("type","button");
+            addClass(nextButton, opts.nextClass);
+            addEvent(nextButton, "click", this, false);
+            pJane.appendChild(prevButton);
+            pJane.appendChild(nextButton);
+            break;
+        }
       },
 
       _pauseTimer: function (e) {

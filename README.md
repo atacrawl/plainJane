@@ -47,10 +47,10 @@ default: 'jane-next'
 options: element class
 ```
 
-**createButtons** (Set to 'false' if you do not want nav buttons created)
+**toggleMethod** (Set to 'false' if you do not want buttons or dots)
 ```
-default: true
-options: boolean (true / false)
+default: 'buttons'
+options: 'buttons', 'dots', boolean (false)
 ```
 
 **pauseOnHover** (Set to 'false' if you do not want the timer compromised)
