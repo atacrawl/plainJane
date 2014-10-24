@@ -1,7 +1,7 @@
 plainJane
 =========
 
-A plain Jane carousel that needs no jQuery. 3.8k minified, 1.3k gzipped.
+A plain Jane carousel that needs no jQuery. 4.4k minified, 1.5k gzipped.
 
 ### How to use
 
