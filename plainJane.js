@@ -105,9 +105,12 @@
           runOnTimer: true,
           janeClass: 'plain-jane',
           activeClass: 'active-jane',
+          toggleMethod: 'buttons',
           prevClass: 'jane-prev',
           nextClass: 'jane-next',
-          toggleMethod: 'buttons',
+          dotsListClass: 'jane-dots',
+          dotClass: 'jane-dot',
+          activeDotClass: 'active-dot',
           pauseOnHover: true,
           displayToggle: true,
           onInit: function(){},
@@ -136,13 +139,10 @@
           throw new Error("Error: Where is Jane?");
         }
 
-        // Inner wrapper
-        this.wrapper.inner = getChildren(this.wrapper);
-
         // For minification
         opts = this.options;
         pJane = this.wrapper;
-        slides = this.wrapper.inner;
+        slides = getChildren(pJane);
         slideCount = slides.length;
 
         // Init
@@ -168,9 +168,11 @@
           removeEvent(pJane, 'mouseout', this, false);
         }
 
-        if (opts.createButtons) {
+        if (opts.toggleMethod == 'buttons') {
           pJane.removeChild(prevButton);
           pJane.removeChild(nextButton);
+        } else if (opts.toggleMethod == 'dots') {
+          pJane.removeChild(dotsList);
         }
 
         clearInterval(slideTimer);
@@ -190,6 +192,8 @@
             this._nextSlide();
           } else if (src.className == opts.prevClass) {
             this._prevSlide();
+          } else if (src.className == opts.dotClass) {
+            this._dotMoveSlide(src.innerHTML);
           }
           break;
         case "mouseover":
@@ -241,7 +245,7 @@
         switch (opts.toggleMethod) {
           case "dots":
             dotsList = document.createElement("ul");
-            addClass(dotsList, opts.dotsClass);
+            addClass(dotsList, opts.dotsListClass);
             for (var x = 1; x <= slideCount; x++) {
               dotsListItem = document.createElement("li");
               addClass(dotsListItem, opts.dotClass);
@@ -299,6 +303,12 @@
         this._moveSlide(janePrev, janeNext);
       },
 
+      _dotMoveSlide: function (e) {
+        var janePrev = parseInt(document.querySelector("."+opts.activeClass).getAttribute("data-index"));
+        var janeNext = e - 1;
+        this._moveSlide(janePrev, janeNext);
+      },
+
       _moveSlide: function (janePrev, janeNext) {
         if (opts.displayToggle) {
           slides[janePrev].style.display = 'none';
@@ -306,7 +316,11 @@
         }
       	removeClass(slides[janePrev], opts.activeClass);
       	addClass(slides[janeNext], opts.activeClass);
-
+        if (opts.toggleMethod == 'dots') {
+          var dotsListItems = getChildren(dotsList);
+          removeClass(dotsListItems[janePrev], opts.activeDotClass);
+          addClass(dotsListItems[janeNext], opts.activeDotClass);
+        }
         // Transition callback
         opts.onTransition();
       }

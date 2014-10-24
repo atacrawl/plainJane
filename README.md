@@ -35,6 +35,12 @@ default: 'active-jane'
 options: element class
 ```
 
+**toggleMethod** (Set to 'false' if you do not want buttons or dots)
+```
+default: 'buttons'
+options: 'buttons', 'dots', boolean (false)
+```
+
 **prevClass** Class for previous button
 ```
 default: 'jane-prev'
@@ -47,10 +53,22 @@ default: 'jane-next'
 options: element class
 ```
 
-**toggleMethod** (Set to 'false' if you do not want buttons or dots)
+**dotsListClass** Class for dots list
 ```
-default: 'buttons'
-options: 'buttons', 'dots', boolean (false)
+default: 'jane-dots'
+options: element class
+```
+
+**dotClass** Class for each dot
+```
+default: 'jane-dot'
+options: element class
+```
+
+**activeDotClass** Class for active dot
+```
+default: 'active-dot'
+options: element class
 ```
 
 **pauseOnHover** (Set to 'false' if you do not want the timer compromised)
