@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
-      src: ['src/*.js']
+      src: ['plainJane.js', 'Gruntfile.js']
     },
     uglify: {
       dist: {
@@ -15,11 +15,12 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['plainJane.js'],
-        tasks: ['uglify']
+        tasks: ['jshint', 'uglify']
       }
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
