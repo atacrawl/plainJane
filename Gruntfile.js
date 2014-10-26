@@ -3,6 +3,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jshint: {
+      options: {
+        newcap: false
+      },
       src: ['plainJane.js', 'Gruntfile.js']
     },
     uglify: {
