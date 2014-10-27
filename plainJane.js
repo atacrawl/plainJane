@@ -34,7 +34,7 @@
         }
       }
     },
-  
+
     removeEvent = function (el, evt, fn, bubble) {
       if ("removeEventListener" in el) {
         try {
@@ -58,7 +58,7 @@
         }
       }
     },
-  
+
     getChildren = function (e) {
       if (e.children.length < 1) {
         throw new Error("Error: No slides.");
@@ -73,14 +73,14 @@
       }
       return children;
     },
-  
+
     addClass = function (el, cls) {
       if (el.className.indexOf(cls) !== 0) {
         el.className += " " + cls;
         el.className = el.className.replace(/(^\s*)|(\s*$)/g,"");
       }
     },
-  
+
     removeClass = function (el, cls) {
       var reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
       el.className = el.className.replace(reg, " ").replace(/(^\s*)|(\s*$)/g,"");
@@ -233,8 +233,8 @@
         }
 
         var that = this;
-        if (slideTimer == null && opts.runOnTimer) {
-          slideTimer = setInterval(function(){ that._nextSlide() }, opts.speed);
+        if (slideTimer === null && opts.runOnTimer) {
+          slideTimer = setInterval(function(){ that._nextSlide(); }, opts.speed);
         }
 
         // Init callback
@@ -284,8 +284,8 @@
 
       _resumeTimer: function (e) {
         var that = this;
-        if (slideTimer == null && opts.runOnTimer) {
-          slideTimer = setInterval(function(){ that._nextSlide() }, opts.speed);
+        if (slideTimer === null && opts.runOnTimer) {
+          slideTimer = setInterval(function(){ that._nextSlide(); }, opts.speed);
         }
       },
 
