@@ -89,6 +89,11 @@ options: boolean (true / false)
 - onTransition
 - onDestroy
 
+### Credits
+
+plainJane is based on the fantastic Responsive Nav plugin written by Viljami Salminen.
+https://github.com/viljamis/responsive-nav.js
+
 ### Coming soon
 
 - Demo page
