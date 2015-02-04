@@ -175,8 +175,7 @@
           pJane.removeChild(dotsList);
         }
 
-        clearInterval(slideTimer);
-        slideTimer = null;
+        this._pauseTimer();
 
         // Destroy callback
         opts.onDestroy();
@@ -232,10 +231,7 @@
           addEvent(pJane, "mouseout", this, false);
         }
 
-        var that = this;
-        if (slideTimer === null && opts.runOnTimer) {
-          slideTimer = setInterval(function(){ that._nextSlide(); }, opts.speed);
-        }
+        this._resumeTimer();
 
         // Init callback
         opts.onInit();
@@ -320,6 +316,10 @@
           var dotsListItems = getChildren(dotsList);
           removeClass(dotsListItems[janePrev], opts.activeDotClass);
           addClass(dotsListItems[janeNext], opts.activeDotClass);
+        }
+        if (opts.runOnTimer && !opts.pauseOnHover) {
+          this._pauseTimer();
+          this._resumeTimer();
         }
         // Transition callback
         opts.onTransition();
